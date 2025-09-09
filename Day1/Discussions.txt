@@ -1,0 +1,51 @@
+1. Python Basics
+Data Types: (primitive)
+    int, float, str, bool: True/False
+    variable: Identifier, which holds the Data
+name="Mahesh"
+age=46
+salary=4000.50
+is_active=True
+
+2. Derived Data
+single name -> many names
+single employee -> many employees
+    list
+    object of the class
+    tuple
+    Dictionaries
+    set/ frozenset
+
+names=['Mahesh', 'Vaishnavi','Banu']
+employees=[Employee('Mahesh', 46, 4000,True), Employee('Vipin KS', 24, 50000000$, True)]
+employees=[Employee('Mahesh', 46, 4000,True), Employee('Vipin KS', 24, 50000000$, True)]
+
+Dictionaries examples given
+
+Memory Layout:
+    Heap: ref1 [Mahesh], 
+    ref2 [46], 
+    ref3 [4000], 
+    ref4 [True], 
+    ref5 ['Mahesh']['Bhanu']                  : index=0,1,2....
+    ...
+    ref6 [ref7][ref8->ref10][ref9]
+    ref7 ['Mahesh'][46][4000][True]
+    ref8 #Vaishnavi elements
+    ref9 #Banu elements
+    ref10 ['Vaishnavi'][21][60000][True]
+
+    Stack: 
+    name [ref1], 
+    age [ref2], 
+    salary [ref3], 
+    is_active [ref4], 
+    names [ref5], 
+    employees [ref6]
+print(names[1], employees[1][1])
+
+    fun_change_vaishnavi(vaishnavi):
+        name, age, salary, is_active=vaishnavi #tuple
+        salary += 20000
+        return (name, age, salary, is_active)
+    employees[1]=fun_change_vaishnavi(employees[1])
