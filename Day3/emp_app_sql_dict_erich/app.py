@@ -1,4 +1,4 @@
-import repo_sql_dict as repo
+from db import repo_sql_dict as repo
 
 def menu():
     message = '''
@@ -20,10 +20,14 @@ Your Option:'''
 
         employee = {'id':id, 'name':name, 'age':age, 
                     'salary':salary, 'is_active':is_active}
+        try:
+            repo.create_employee(employee)
+            print("Employee created successfully.")
+        except repo.EmployeeAlreadyExistError as ex:
+            print(f"{ex}")
+        except repo.DatabaseError as ex:
+            print(f"{ex}")
 
-        repo.create_employee(employee)
-
-        print('Employee Created Successfully.')
     elif choice == 2:
         print('List of Employees:')
         for employee in repo.read_all_employee():
@@ -67,5 +71,4 @@ def menus():
     choice = menu()
     while choice != 6:
         choice = menu()
-    
 menus()

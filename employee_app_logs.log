@@ -1,0 +1,13 @@
+2025-09-11 13:43:45,686 [INFO] BEGIN (implicit)
+2025-09-11 13:43:45,690 [INFO] SELECT employees.id AS employees_id, employees.name AS employees_name, employees.age AS employees_age, employees.salary AS employees_salary, employees.is_active AS employees_is_active 
+FROM employees
+2025-09-11 13:43:45,691 [INFO] [generated in 0.00066s] ()
+2025-09-11 13:43:45,693 [INFO] read all employees.
+2025-09-11 14:45:25,771 [INFO] BEGIN (implicit)
+2025-09-11 14:45:25,774 [INFO] INSERT INTO employees (id, name, age, salary, is_active) VALUES (?, ?, ?, ?, ?)
+2025-09-11 14:45:25,774 [INFO] [generated in 0.00058s] (1, 'Dravid', 25, 2000.0, 1)
+2025-09-11 14:45:25,776 [INFO] ROLLBACK
+2025-09-11 14:45:25,777 [ERROR] Duplicate employee id:(sqlite3.IntegrityError) UNIQUE constraint failed: employees.id
+[SQL: INSERT INTO employees (id, name, age, salary, is_active) VALUES (?, ?, ?, ?, ?)]
+[parameters: (1, 'Dravid', 25, 2000.0, 1)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
