@@ -14,16 +14,25 @@
         "airline_name": "SpiceJet",
         "seats": 51,
         "price": 210000.0,
-        "source": "Bangalore",
-        "destination": "Mangalore"
+        "source": "India",
+        "destination": "USA"
     },
     {
         "id": 3,
         "number": "103",
         "airline_name": "Lufthansa",
         "seats": 50,
-        "price": 300000.0,
+        "price": 250000.0,
         "source": "Bangalore",
+        "destination": "UK"
+    },
+    {
+        "id": 4,
+        "number": "104",
+        "airline_name": "India",
+        "seats": 50,
+        "price": 200000.0,
+        "source": "Indigo",
         "destination": "USA"
     }
 ]
