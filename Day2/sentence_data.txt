@@ -1,0 +1,2 @@
+Original Word List: ['I', 'am', 'Vipin']
+Uppercase Word Tuple: ('I', 'AM', 'VIPIN')

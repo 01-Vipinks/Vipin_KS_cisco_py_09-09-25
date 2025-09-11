@@ -1,0 +1,18 @@
+Types
+    Primitive: name, float, bool
+    Derived: str, list, tuple, set/frozenset
+
+------
+
+writer=open(filename,'w')
+writer.write(something)
+#...
+writer.close()
+
+-----
+
+with open(filename, 'w') as writer:
+    writer.write(something)
+    #...
+
+

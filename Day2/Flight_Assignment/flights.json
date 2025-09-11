@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "number": "101",
+        "airline_name": "JetAirways",
+        "seats": 52,
+        "price": 110000.0,
+        "source": "Bangalore",
+        "destination": "Delhi"
+    },
+    {
+        "id": 2,
+        "number": "102",
+        "airline_name": "SpiceJet",
+        "seats": 51,
+        "price": 210000.0,
+        "source": "Bangalore",
+        "destination": "Mangalore"
+    },
+    {
+        "id": 3,
+        "number": "103",
+        "airline_name": "Lufthansa",
+        "seats": 50,
+        "price": 300000.0,
+        "source": "Bangalore",
+        "destination": "USA"
+    }
+]
