@@ -1,0 +1,1 @@
+[{"id": 1, "number": "101", "airline_name": "JetAirways", "capacity": 50, "price": 100000.0, "source": "Bangalore", "destination": "UK"}, {"id": 2, "number": "102", "airline_name": "SpiceJet", "capacity": 51, "price": 110000.0, "source": "Bangalore", "destination": "Malaysia"}]
