@@ -1,5 +1,6 @@
 from db import repo_sql_dict as repo
 
+
 def menu():
     message = '''
 Options are:
@@ -66,6 +67,7 @@ Your Option:'''
         print('Thank you for using Application')
 
     return choice 
+
 
 def menus():
     choice = menu()
