@@ -11,3 +11,18 @@ FROM employees
 [SQL: INSERT INTO employees (id, name, age, salary, is_active) VALUES (?, ?, ?, ?, ?)]
 [parameters: (1, 'Dravid', 25, 2000.0, 1)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-14 18:28:24,590 [INFO] BEGIN (implicit)
+2025-09-14 18:28:24,606 [INFO] INSERT INTO employees (id, name, age, salary, is_active) VALUES (?, ?, ?, ?, ?)
+2025-09-14 18:28:24,608 [INFO] [generated in 0.00194s] (1, 'Vidya', 20, 20000.0, 1)
+2025-09-14 18:28:24,614 [INFO] COMMIT
+2025-09-14 18:28:24,628 [INFO] employee created.
+2025-09-14 18:29:02,377 [INFO] BEGIN (implicit)
+2025-09-14 18:29:02,378 [INFO] INSERT INTO employees (id, name, age, salary, is_active) VALUES (?, ?, ?, ?, ?)
+2025-09-14 18:29:02,378 [INFO] [cached since 37.77s ago] (2, 'Lakshmi', 20, 2000000.0, 1)
+2025-09-14 18:29:02,380 [INFO] COMMIT
+2025-09-14 18:29:02,387 [INFO] employee created.
+2025-09-14 18:29:05,905 [INFO] BEGIN (implicit)
+2025-09-14 18:29:05,908 [INFO] SELECT employees.id AS employees_id, employees.name AS employees_name, employees.age AS employees_age, employees.salary AS employees_salary, employees.is_active AS employees_is_active 
+FROM employees
+2025-09-14 18:29:05,908 [INFO] [generated in 0.00033s] ()
+2025-09-14 18:29:05,910 [INFO] read all employees.
