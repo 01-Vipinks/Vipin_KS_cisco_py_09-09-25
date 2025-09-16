@@ -83,7 +83,9 @@ bms/
   d. Run CLI client: 
       python client/cli.py
 
-###e. Run tests: 
-     ###pytest tests/
+  e. Run tests: 
+      pytest tests/
+      
 ---
+
 
