@@ -1,0 +1,6 @@
+Flask
+Flask-SQLAlchemy
+pytest
+python-json-logger
+requests
+beautifulsoup4
