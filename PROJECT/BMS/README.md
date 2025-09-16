@@ -71,18 +71,19 @@ bms/
 
 ## 5. Setup Instructions
 ---
-  a. Install dependencies
+  a. Install dependencies: 
       pip install -r requirements.txt
   
-  b. Configure Mail
+  b. Configure Mail: 
       Update app/mail_config.py with your SMTP credentials (Gmail App Password, sender, and receiver emails).
 
-  c. Run the API server
+  c. Run the API server: 
       python run.py
     
-  d. Run CLI client
+  d. Run CLI client: 
       python client/cli.py
-      
-  e. Run tests
-      pytest tests/
+
+###e. Run tests: 
+     ###pytest tests/
 ---
+
