@@ -1,6 +1,7 @@
 import pytest
 from app.models import Account, db
 from app.crud import create_account, read_by_id, update_account, delete_account
+from app.scrapper import scrape_interest_rates
 
 @pytest.fixture(scope="module")
 def test_client():
@@ -30,3 +31,23 @@ def test_delete_account(test_client):
     delete_account(1)
     with pytest.raises(Exception):
         read_by_id(1)
+
+def test_scrape_for_crud(monkeypatch):
+    class MockResponse:
+        status_code = 200
+        text = """
+            <html>
+            <table id="interest-rates">
+                <tr><th>Product</th><th>Rate</th><th>Tenure</th></tr>
+                <tr><td>FD</td><td>5%</td><td>1 year</td></tr>
+            </table>
+            </html>
+        """
+    def mock_get(*args, **kwargs):
+        return MockResponse()
+    import requests
+    monkeypatch.setattr(requests, "get", mock_get)
+    rates = scrape_interest_rates("dummy-url", pages=1)
+    assert len(rates) == 1
+    assert rates[0]['product'] == 'FD'
+    assert rates[0]['rate'] == '5%'
