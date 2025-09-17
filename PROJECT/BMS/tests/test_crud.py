@@ -1,38 +1,60 @@
+"""
+Tests for CRUD operations and scraper integration in Banking Management System.
+"""
+
 import pytest
-from app.models import Account, db
-from app.crud import create_account, read_by_id, update_account, delete_account
-from app.scrapper import scrape_interest_rates
 
 @pytest.fixture(scope="module")
 def test_client():
+    """
+    Setup Flask test client with in-memory SQLite DB for testing.
+    """
     from app.routes import application
+    from app.models import db
+
     application.config['TESTING'] = True
     application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+
     with application.app_context():
         db.create_all()
         yield application.test_client()
         db.drop_all()
 
-def test_create_and_read_account(test_client):
+def test_create_and_read_account(_test_client):  # noqa: W0621, W0613
+    """
+    Test creating an account and reading it back.
+    """
+    from app.crud import create_account, read_by_id
     account_data = {'id': 1, 'name': 'Test Account', 'number': '1234567890', 'balance': 1000.0}
     create_account(account_data)
     fetched = read_by_id(1)
     assert fetched['name'] == 'Test Account'
     assert fetched['balance'] == 1000.0
 
-def test_update_account(test_client):
+def test_update_account(_test_client):  # noqa: W0621, W0613
+    """
+    Test updating an existing account.
+    """
+    from app.crud import update_account, read_by_id
     updated_data = {'name': 'Updated Account', 'number': '0987654321', 'balance': 1500.0}
     update_account(1, updated_data)
     fetched = read_by_id(1)
     assert fetched['name'] == 'Updated Account'
     assert fetched['balance'] == 1500.0
 
-def test_delete_account(test_client):
+def test_delete_account(_test_client):  # noqa: W0621, W0613
+    """
+    Test deleting an account.
+    """
+    from app.crud import delete_account, read_by_id
     delete_account(1)
     with pytest.raises(Exception):
         read_by_id(1)
 
 def test_scrape_for_crud(monkeypatch):
+    """
+    Test scraper integration with mocked HTTP response.
+    """
     class MockResponse:
         status_code = 200
         text = """
@@ -47,6 +69,7 @@ def test_scrape_for_crud(monkeypatch):
         return MockResponse()
     import requests
     monkeypatch.setattr(requests, "get", mock_get)
+    from app.scrapper import scrape_interest_rates
     rates = scrape_interest_rates("dummy-url", pages=1)
     assert len(rates) == 1
     assert rates[0]['product'] == 'FD'

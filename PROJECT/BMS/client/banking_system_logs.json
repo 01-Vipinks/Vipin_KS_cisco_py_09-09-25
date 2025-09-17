@@ -1,0 +1,4 @@
+{"asctime": "2025-09-17 12:36:00,928", "levelname": "INFO", "name": "banking_system_logger", "message": "Read all accounts via client."}
+{"asctime": "2025-09-17 12:36:26,266", "levelname": "INFO", "name": "banking_system_logger", "message": "Account created via client.", "account": {"id": 101, "name": "Vipin", "number": "761", "balance": 10000000.0}}
+{"asctime": "2025-09-17 12:36:29,514", "levelname": "INFO", "name": "banking_system_logger", "message": "Read all accounts via client."}
+{"asctime": "2025-09-17 12:37:00,568", "levelname": "INFO", "name": "banking_system_logger", "message": "Read account by ID via client.", "id": 101}

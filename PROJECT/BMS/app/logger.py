@@ -1,10 +1,16 @@
+"""
+Logger setup module for Banking Management System.
+
+Configures a structured JSON logger with console and file output handlers.
+"""
+
 import logging
 import sys
 from pythonjsonlogger import jsonlogger
 
 # Create logger
 logger = logging.getLogger("banking_system_logger")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.WARNING)  # Raised level to WARNING to suppress INFO logs
 
 # Setup console handler
 console_handler = logging.StreamHandler(sys.stdout)
@@ -19,5 +25,5 @@ logger.addHandler(file_handler)
 
 # Test run
 if __name__ == "__main__":
-    logger.info("Logger initialized successfully")
-    logger.info("Test log entry", extra={"module": "test", "status": "success"})
+    logger.warning("Logger initialized with level WARNING")
+    logger.info("This info log will not appear on console")

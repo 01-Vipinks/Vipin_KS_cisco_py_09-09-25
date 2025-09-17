@@ -1,14 +1,13 @@
 """
-    Consuming Accounts Management APIs
-    - Consumer Account App
-    - Account Client
-
-    API REPO
+Consuming Accounts Management APIs
+- Consumer Account App
+- Account Client
+API REPO
 """
 
-import requests
 import sys
 import os
+import requests
 
 # Import the project logger from app/logger.py
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app')))
@@ -27,7 +26,7 @@ def create_account(account):
         dict: Created account details
     """
     url = f'{BASE_URL}/accounts'
-    response = requests.post(url, json=account)
+    response = requests.post(url, json=account, timeout=10)
     created_account_dict = response.json()
     logger.info("Account created via client.", extra={"account": account})
     return created_account_dict
@@ -40,56 +39,56 @@ def read_all_accounts():
         list: List of account details
     """
     url = f'{BASE_URL}/accounts'
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     dict_accounts = response.json()
     logger.info("Read all accounts via client.")
     return dict_accounts
 
-def read_by_id(id):
+def read_by_id(account_id):
     """
     Retrieve a specific account by id.
 
     Args:
-        id (int): Account id
+        account_id (int): Account id
 
     Returns:
         dict: Account details
     """
-    url = f'{BASE_URL}/accounts/{id}'
-    response = requests.get(url)
+    url = f'{BASE_URL}/accounts/{account_id}'
+    response = requests.get(url, timeout=10)
     account_dict = response.json()
-    logger.info("Read account by ID via client.", extra={"id": id})
+    logger.info("Read account by ID via client.", extra={"id": account_id})
     return account_dict
 
-def update(id, new_account):
+def update(account_id, new_account):
     """
     Update a specific account by id.
 
     Args:
-        id (int): Account id
+        account_id (int): Account id
         new_account (dict): New account data
 
     Returns:
         dict: Updated account details
     """
-    url = f'{BASE_URL}/accounts/{id}'
-    response = requests.put(url, json=new_account)
+    url = f'{BASE_URL}/accounts/{account_id}'
+    response = requests.put(url, json=new_account, timeout=10)
     updated_account_dict = response.json()
-    logger.info("Updated account by ID via client.", extra={"id": id, "new_account": new_account})
+    logger.info("Updated account by ID via client.", extra={"id": account_id, "new_account": new_account})
     return updated_account_dict
 
-def delete_account(id):
+def delete_account(account_id):
     """
     Delete a specific account by id.
 
     Args:
-        id (int): Account id
+        account_id (int): Account id
 
     Returns:
         dict: Deletion message
     """
-    url = f'{BASE_URL}/accounts/{id}'
-    response = requests.delete(url)
+    url = f'{BASE_URL}/accounts/{account_id}'
+    response = requests.delete(url, timeout=10)
     message_dict = response.json()
-    logger.info("Deleted account by ID via client.", extra={"id": id})
+    logger.info("Deleted account by ID via client.", extra={"id": account_id})
     return message_dict

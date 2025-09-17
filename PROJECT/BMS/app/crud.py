@@ -36,7 +36,7 @@ def create_account(account):
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        raise DatabaseError(f"Failed to create account: {e}")
+        raise DatabaseError(f"Failed to create account: {e}") from e
 
 def read_all_accounts():
     """
@@ -49,12 +49,12 @@ def read_all_accounts():
     dict_accounts = [account.to_dict() for account in accounts]
     return dict_accounts
 
-def read_model_by_id(id):
+def read_model_by_id(account_id):
     """
     Retrieve the Account model instance by id.
 
     Args:
-        id (int): Account id.
+        account_id (int): Account id.
 
     Raises:
         AccountNotFoundError: If account is not found.
@@ -62,17 +62,17 @@ def read_model_by_id(id):
     Returns:
         Account: ORM model instance.
     """
-    account = db.session.query(Account).filter_by(id=id).first()
+    account = db.session.query(Account).filter_by(id=account_id).first()
     if not account:
-        raise AccountNotFoundError(f"Account with id {id} not found.")
+        raise AccountNotFoundError(f"Account with id {account_id} not found.")
     return account
 
-def read_by_id(id):
+def read_by_id(account_id):
     """
     Retrieve account details as a dictionary by id.
 
     Args:
-        id (int): Account id.
+        account_id (int): Account id.
 
     Raises:
         AccountNotFoundError: If account is not found.
@@ -80,15 +80,15 @@ def read_by_id(id):
     Returns:
         dict: Account details.
     """
-    account = read_model_by_id(id)
+    account = read_model_by_id(account_id)
     return account.to_dict()
 
-def update_account(id, new_account):
+def update_account(account_id, new_account):
     """
     Update an existing account's details.
 
     Args:
-        id (int): Account id to update.
+        account_id (int): Account id to update.
         new_account (dict): Updated account fields: 'name', 'number', 'balance'.
 
     Raises:
@@ -98,9 +98,9 @@ def update_account(id, new_account):
     Returns:
         None
     """
-    account = db.session.query(Account).filter_by(id=id).first()
+    account = db.session.query(Account).filter_by(id=account_id).first()
     if not account:
-        raise AccountNotFoundError(f"Account with id {id} not found.")
+        raise AccountNotFoundError(f"Account with id {account_id} not found.")
     try:
         account.name = new_account['name']
         account.number = new_account['number']
@@ -108,14 +108,14 @@ def update_account(id, new_account):
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        raise DatabaseError(f"Failed to update account: {e}")
+        raise DatabaseError(f"Failed to update account: {e}") from e
 
-def delete_account(id):
+def delete_account(account_id):
     """
     Delete an account from the database by id.
 
     Args:
-        id (int): Account id.
+        account_id (int): Account id.
 
     Raises:
         AccountNotFoundError: If account is not found.
@@ -124,12 +124,12 @@ def delete_account(id):
     Returns:
         None
     """
-    account = db.session.query(Account).filter_by(id=id).first()
+    account = db.session.query(Account).filter_by(id=account_id).first()
     if not account:
-        raise AccountNotFoundError(f"Account with id {id} not found.")
+        raise AccountNotFoundError(f"Account with id {account_id} not found.")
     try:
         db.session.delete(account)
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        raise DatabaseError(f"Failed to delete account: {e}")
+        raise DatabaseError(f"Failed to delete account: {e}") from e

@@ -1,3 +1,9 @@
+"""
+Web scraper module for Banking Management System.
+
+Contains function to scrape interest rates from paginated webpages.
+"""
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -15,7 +21,7 @@ def scrape_interest_rates(base_url, pages=1):
     all_rates = []
     for page in range(1, pages + 1):
         url = f"{base_url}/page/{page}/"
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)  # added timeout to avoid hanging
         if response.status_code != 200:
             continue
         soup = BeautifulSoup(response.text, "html.parser")

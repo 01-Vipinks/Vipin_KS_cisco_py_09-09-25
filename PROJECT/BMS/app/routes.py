@@ -6,9 +6,9 @@ error handling for custom exceptions, and integrates email notification
 after account creation. Uses SQLAlchemy ORM via the crud layer.
 """
 
-from flask import Flask, request, jsonify
 from datetime import datetime
-import app.crud as crud
+from flask import Flask, request, jsonify
+from app import crud  # Fixed import style to follow pylint recommendation
 from app.config import config
 import app.emailer as mail
 from app.exceptions import AccountNotFoundError, AccountAlreadyExistError, DatabaseError
@@ -37,6 +37,7 @@ def handle_not_found_error(error):
     response.status_code = 404
     return response
 
+
 @application.errorhandler(AccountAlreadyExistError)
 def handle_already_exist_error(error):
     """
@@ -48,6 +49,7 @@ def handle_already_exist_error(error):
     response.status_code = 409
     return response
 
+
 @application.errorhandler(DatabaseError)
 def handle_database_error(error):
     """
@@ -58,6 +60,7 @@ def handle_database_error(error):
     response = jsonify({'error': str(error)})
     response.status_code = 500
     return response
+
 
 @application.route("/accounts", methods=['POST'])
 def create_account():
@@ -84,12 +87,13 @@ name : {account_dict["name"]}
 number : {account_dict["number"]}
 balance : {account_dict["balance"]}
         '''
-        result = mail.send_gmail(mail.to_address, subject, mail_body)
+        result = mail.send_gmail(mail.FROM_ADDRESS, subject, mail_body)
         print(f'mail sent?{result}')
 
         return jsonify(saved_account_dict)
     except (AccountAlreadyExistError, DatabaseError) as e:
         return handle_database_error(e)
+
 
 @application.route("/accounts", methods=['GET'])
 def read_all_accounts():
@@ -100,6 +104,7 @@ def read_all_accounts():
     """
     accounts_dict = crud.read_all_accounts()
     return jsonify(accounts_dict)
+
 
 @application.route("/accounts/<acc_id>", methods=['GET'])
 def read_account_by_id(acc_id):
@@ -116,6 +121,7 @@ def read_account_by_id(acc_id):
         return jsonify(account_dict)
     except AccountNotFoundError as e:
         return handle_not_found_error(e)
+
 
 @application.route("/accounts/<acc_id>", methods=['PUT'])
 def update_account(acc_id):
@@ -135,6 +141,7 @@ def update_account(acc_id):
         return jsonify(saved_account_dict)
     except (AccountNotFoundError, DatabaseError) as e:
         return handle_database_error(e)
+
 
 @application.route("/accounts/<acc_id>", methods=['DELETE'])
 def delete_account(acc_id):
